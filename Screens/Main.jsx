@@ -37,7 +37,7 @@ const Main = (props) => {
     if(check){
   try{
     console.log(SpellID)
-    console.log(MySpellBook[0])/*
+    console.log(MySpellBook[0])/*  Backend prepeard Statement under construction
     const request={
       method: 'POST',
       headers: { 'Content-Type' : 'application/json'},

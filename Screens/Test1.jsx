@@ -23,7 +23,7 @@ import { StackActions } from '@react-navigation/native';
       setIntindex(prev=>prev-1)
     }
     console.log("less")
-  break;}
+  break;}   //---> Increase/Decrease Statwert and Anzeigeleiste für Int (1 Stat Only)
 
   }
   const changeStr=(key)=>{    
@@ -47,7 +47,7 @@ import { StackActions } from '@react-navigation/native';
       setStrindex(prev=>prev-1)
     }
     console.log("less")
-  break;}
+  break;}   //---> Increase/Decrease Statwert and Anzeigeleiste für STR (1 Stat Only)
 
   }
   <View style={{justifyContent:'center',alignItems:'center'}}><Text style={styles.text}>Intelligenz</Text></View>
@@ -100,7 +100,7 @@ import { StackActions } from '@react-navigation/native';
         <Werteleiste Attribut={"Intelligenz"}  Limit={Points} Limitset={setPoints} Statvalue={Statpointarray} Statvalueset={setStatpointarray} Slot={3}/>
         <Werteleiste Attribut={"Weisheit"}     Limit={Points} Limitset={setPoints} Statvalue={Statpointarray} Statvalueset={setStatpointarray} Slot={4}/>
         <Werteleiste Attribut={"Charisma"}     Limit={Points} Limitset={setPoints} Statvalue={Statpointarray} Statvalueset={setStatpointarray} Slot={5}/>
-      </>
+      </> //----> Werteleiste Display des StatBalken
       :
       ""
       }  */
@@ -112,6 +112,35 @@ const Test1 = (props) => {
   const [Strarr,setStrarr]=useState([true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false])
   
   console.log("-------------")
+  
+  const AvatarStatTyps= ["Konstitution","Stärke","Agilität","Intelligenz","Weisheit","Charisma"]
+  const [StatArray,setStatArray]=useState([])
+
+  const RollforStats=()=>{
+    AvatarStatTyps.forEach(e=>{
+      let x =(Math.floor(Math.random()*20)+1)
+      StatArray.push(x)
+      })
+    }
+  const RollforStatsAlt=()=>{
+    AvatarStatTyps.forEach(e=>{
+      let a =(Math.floor(Math.random()*6)+1)
+      let b =(Math.floor(Math.random()*6)+1)
+      let c =(Math.floor(Math.random()*6)+1)
+      console.log(a + " + " + b + " + " + c)
+      let x =a+b+c
+      console.log("You rolled a " +x)
+      StatArray.push(x)
+      })
+      let i=0
+      AvatarStatTyps.forEach(e=>{        
+        console.log("Your " + e + " Attribut is: " + StatArray[i])
+        i++
+      })
+
+      let arr= Array(20).fill(0)
+      console.log(arr)
+    }
   
 
   const rollstärke=()=>{
@@ -154,7 +183,7 @@ const Test1 = (props) => {
     }
   }
   useEffect(()=>{
-    rollstärke()
+    RollforStatsAlt()
   },[])
 
   return (
@@ -181,20 +210,21 @@ const Test1 = (props) => {
         </View>
         <View style={{justifyContent:'center',alignItems:'center'}}><TouchableOpacity onPress={()=>rollstärke()}><Text style={styles.text}>Stärke</Text></TouchableOpacity></View>
         <View style={styles.row2}>
-        <View style={styles.row}>
+          <View style={{flexDirection:'column',width:'100%',borderWidth:1,borderColor:'#fff'}}>
           {
-            Strarr.map((item,index)=>(
-              item==true?
-
-              <View key={"STR: "+(index*10)+" Gained"} style={styles.Box2}></View>
-
-              :
-              
-              <View key={"STR: "+(index*10)} style={styles.Box}></View>
+            AvatarStatTyps.map((item,index)=>(
+              <View style={{borderWidth:1,borderColor:'red',alignSelf:'flex-end',margin:5,flexDirection: 'row',width:'100%'}}>
+                  <View style={{borderWidth:1,borderColor:'#fff',padding:10,margin:5}}><Text style={{color:'#fff'}}>{item}</Text></View>
+              <View style={{borderWidth:1,borderColor:'#fff',flexDirection:'row'}}>
+              {
+                Array(20).fill(0).map((_,i)=> (
+                  <View key={i} style={{margin:5,borderWidth:1,borderColor:'#fff',borderColor:'#fff',borderWidth:1, width:20 ,height: 20, backgroundColor: i < StatArray[index] ? 'green' : 'black'}}></View>
+                ))
+              }</View>
+             </View>
             ))
-          }
+          }</View>
           
-        </View>
        </View>
       </View>
       

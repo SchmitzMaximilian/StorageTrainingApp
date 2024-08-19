@@ -19,6 +19,13 @@ const detectEncounter=()=>{
 
 <skillDB GroupArray={Gruppe1} Skillset={setG1S} />
 
+const getSkillArrays=()=>{
+let def=defendersstat[DefenderID]
+let ang=enemyGroups[AttackerID]
+const DSkillArr=skillDB(def)
+const ASkillArr=skillDB(ang)
+}
+
 -----------------------------------EVE Combatergebnis
 const Aftermath=(Loser)=>{
   if(Loser==1){
@@ -45,6 +52,27 @@ cosnt wallAttack=()=>{
   console.log("No Attack on the Wall")
   }
 
+--------------------------------------Advance on Wall
+
+const charge=()=>{
+  let x = Math.floor(Math.random()*army.length)
+  let arr= army
+  arr[x][0]=arr[x][0]-20
+  setarmy(arr)
+  }
+
+const StormTheWall=()=>{
+interval.Advance1 = setInterval(charge,4000)
+setTimeout(()=>{
+interval.Advance2 = setInterval(charge,4000)},1000)
+setTimeout(()=>{
+interval.Advance3 = setInterval(charge,4000)},2000)
+setTimeout(()=>{
+interval.Advance4 = setInterval(charge,4000)},3000)}
+
+
+
+  --------------------------------------------------------------------
 const skillDB=()=>{
   let arr= group1arr
   let skillarr=[]
@@ -247,6 +275,36 @@ setEnemyStatArray(enemyCombinations)
     }
     }
 
+    const detectEncounter=()=>{
+      let encounterIndex = army.findIndex(([vv,vh,isAlive])=>{
+        return (vv-5)==vertival && (vh-5)==horival && isAlive})
+      
+      if(encounterIndex != -1){
+        clearInterval(interval.Advance1)
+        clearInterval(interval.Advance2)
+        clearInterval(interval.Advance3)
+        clearInterval(interval.Advance4)
+        setEI(encounterIndex)
+        Alert.alert("Fight","You see a Group of Skeletons walking towards you",[{text: "Attack",onPress: ()=>{raiseundead()}},{text: "Run",onPress: ()=>{}}])
+            
+      } }
+
+      const charge=()=>{
+        let x = Math.floor(Math.random()*army.length)
+        let arr= army
+        arr[x][0]=arr[x][0]-20
+        setarmy(arr)
+        detectEncounter()
+        }
+      
+      const StormTheWall=()=>{
+      interval.Advance1 = setInterval(charge,4000)
+      setTimeout(()=>{
+      interval.Advance2 = setInterval(charge,4000)},1000)
+      setTimeout(()=>{
+      interval.Advance3 = setInterval(charge,4000)},2000)
+      setTimeout(()=>{
+      interval.Advance4 = setInterval(charge,4000)},3000)}
 useEffect(()=>{
     createEnemyGroups()
     if(defenders.length==0){
@@ -258,6 +316,13 @@ useEffect(()=>{
     if(EnemyStatArray.length==0){
     NecronGuardspawn()}
     spawnOrder()
+    StormTheWall()
+    return()=>{
+      clearInterval(interval.Advance1)
+      clearInterval(interval.Advance2)
+      clearInterval(interval.Advance3)
+      clearInterval(interval.Advance4)
+    }
   },[])
 
   return (

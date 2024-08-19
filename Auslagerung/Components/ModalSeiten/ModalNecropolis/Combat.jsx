@@ -2,6 +2,21 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Alert, Modal, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { StackActions } from '@react-navigation/native';
 
+
+/*
+let i=0
+for(i;i<AttackercurrentHPArray.length;i++)
+let arr= AttackercurrentHPArray
+let x= Math.floor(Math.random()*AttackercurrentHPArray.length)    //--->Random Defenderselect to Attack
+//function for Selecting skill used !Watch for mana requierments! 
+let Skilldmg= //Wert vom SkillArray
+
+arr[x]=arr[x]-Skilldmg
+setAttackercurrentHPArray(arr)
+*/
+
+
+
 const Combat = (props) => {
   //----------------->Group1 Stats
   const [AttackerHPArray,setAttackerHPArray]=useState([])

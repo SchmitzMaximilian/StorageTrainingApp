@@ -1,5 +1,5 @@
-  const skillDB=(props)=>{
-    let arr= props.GroupArray
+  const skillDB=(Group)=>{//Group instead of props
+    let arr=Group  //props.GroupArray
     let skillarr=[]
     arr.forEach(e=>{
       let key=e[0]
@@ -36,7 +36,8 @@
       break;
     }
       })
-      props.Skillset(skillarr)    
+      //props.Skillset(skillarr)
+      return skillarr  
     }
 
 export default skillDB
