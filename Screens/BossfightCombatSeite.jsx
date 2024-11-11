@@ -77,7 +77,13 @@ setmodify(2)
   
   const heal=()=>{
     setcurrentHP(prev=>prev+100)
-      setcurrentMP(prev=>prev-50)
+    setcurrentMP(prev=>prev-50)
+  }
+  const DrainLife=()=>{
+    setBosscurrentHP(prev=>prev - 40)
+    setcurrentHP(prev=>prev+40)
+    setcurrentMP(prev=>prev - 50)
+
   }
   
   return (
@@ -135,6 +141,9 @@ setmodify(2)
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>(heal(),setPhase(1))}>
               <Text style={styles.text}>Heal</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=>(DrainLife(),setPhase(1))}>
+              <Text style={styles.text}>Drain Life</Text>
             </TouchableOpacity>
             
               </>

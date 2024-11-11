@@ -67,9 +67,20 @@ const Attributvergabe = (props) => {
     }
   }
 
+  const generate=()=>{
+    let BaseStat=100
+    let EndHPmin= 50
+    let EndHPmax= 300
+    let Abstand= 10
+    let dif= (EndHPmax-EndHPmin)/Abstand+1
+    let BonusHp= Math.floor((Math.random()*dif)*Abstand+EndHPmin)
+    let EndHP=BaseStat + BonusHp
+    console.log(EndHP)
+  }
   
 useEffect(()=>{
   readAttributeliste()
+  generate()
   },[])
   useEffect(()=>{},[Savestatarray])
   return (
